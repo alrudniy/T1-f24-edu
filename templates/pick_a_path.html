@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pick a Path</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+    <div class="card p-4 shadow-sm">
+        <h1 class="text-center">Welcome to the Pick a Path Page</h1>
+
+        {% if current_user.is_authenticated %}
+            <p class="text-center">Hello, {{ current_user.firstname }}! You are logged in.</p>
+            <div class="text-center">
+                <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+            </div>
+        {% else %}
+            <p class="text-center">You are not logged in.</p>
+            <div class="text-center">
+                <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
+            </div>
+        {% endif %}
+
+        <h2 class="mt-4">Select an option below:</h2>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="{{ url_for('scenario1') }}">Scenario 1</a></li>
+            <li class="list-group-item"><a href="{{ url_for('scenario2') }}">Scenario 2</a></li>
+            <li class="list-group-item"><a href="{{ url_for('article1') }}">Article 1</a></li>
+        </ul>
+    </div>
+</body>
+</html>
