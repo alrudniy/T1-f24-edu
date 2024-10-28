@@ -91,6 +91,11 @@ def scenario2():
 def article1():
     return render_template('article1.html')
 
+@app.route('/landlord_experience')
+@login_required
+def landlord_experience():
+    return render_template('landlord_experience.html')
+
 @app.route('/logout')
 @login_required
 def logout():
