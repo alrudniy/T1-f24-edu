@@ -5,11 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Past Landlord Experiences</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            z-index: 1000;
+        }
+        .popup.active {
+            display: block;
+        }
+        .popup .close-btn {
+            float: right;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body class="container mt-5">
     <div class="card p-4 shadow-sm">
         <h2 class="text-center">Landlord Experiences</h2>
         <p>This is the past landlord experience screen. Multiple testimony options should be displayed below.</p>
     </div>
+    <button type="button" onclick="togglePopup()">Here's a testimony from Wazy Hemisphere!</button>
+
+    <div id="popup" class="popup">
+        <span class="close-btn" onclick="togglePopup()">&times;</span>
+        <h2>Testimony from Wazy Hemisphere</h2>
+        <p>"I really appreciated the financial consistency of vouchers. During COVID, many fellow property owners lost tenants. Because voucher money comes from the government, my income from tenants was more stable." - Wazy Hemisphere  You can close this box by clicking the "×" button.</p>
+    </div>
+
+    <script>
+        function togglePopup() {
+            var popup = document.getElementById("popup");
+            popup.classList.toggle("active");
+        }
+    </script>
 </body>
 </html>
