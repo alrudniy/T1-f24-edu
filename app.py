@@ -3,6 +3,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
 from werkzeug.security import generate_password_hash, check_password_hash
+import pymysql
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'csci400_random_string_as_secret_key'
@@ -10,7 +11,8 @@ app.config['SECRET_KEY'] = 'csci400_random_string_as_secret_key'
 # Configure the database URI for SQLAlchemy
 username = 't1'  # Replace with actual username
 password = 'YWQQEg1QwgVTc40K'  # Replace with actual password
-engine = sqlalchemy.create_engine(f"mariadb+mariadbconnector://{username}:{password}@34.125.69.91/f24_housing_db")
+#engine = sqlalchemy.create_engine(f"mariadb+mariadbconnector://{username}:{password}@34.125.69.91/f24_housing_db")
+engine = sqlalchemy.create_engine(f"mysql+pymysql://{username}:{password}@34.125.69.91/f24_housing_db", connect_args={'ssl': {'disabled': True}})
 
 Base = declarative_base()
 
