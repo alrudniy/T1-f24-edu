@@ -98,6 +98,11 @@ def article1():
 def landlord_experience():
     return render_template('landlord_experience.html')
 
+@app.route('/text_message_visual')
+@login_required
+def text_message_visual():
+    return render_template('text_message_visual.html')
+
 @app.route('/logout')
 @login_required
 def logout():
