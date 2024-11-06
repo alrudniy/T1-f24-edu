@@ -96,7 +96,20 @@ def article1():
 def logout():
     logout_user()  # Log out the user
     flash('You have been logged out', 'success')
-    return redirect(url_for('login'))
+    return redirect(url_for('login')) 
+
+
+
+
+
+
+
+@app.route('/emptypage')  
+@login_required  
+def emptypage():  
+     return render_template('emptypage.html')  
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
