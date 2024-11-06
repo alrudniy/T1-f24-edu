@@ -107,7 +107,14 @@ def logout():
 @app.route('/emptypage')  
 @login_required  
 def emptypage():  
-     return render_template('emptypage.html')  
+     return render_template('emptypage.html')   
+ 
+ 
+ 
+@app.route('/emptypage2')  
+@login_required  
+def emptypage2():  
+     return render_template('emptypage2.html')  
 
 
 
