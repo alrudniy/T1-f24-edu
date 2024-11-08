@@ -13,6 +13,24 @@
     
     <!-- Links to Bootstrap CSS for styling and layout support -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS to set the background image -->
+    <style>
+        /* Applies a background image to the body */
+        body {
+            background-image: url("{{ url_for('static', filename='images/titlebg.png') }}"); 
+            background-size: cover; /* Ensures the image covers the entire screen */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            background-attachment: fixed; /* Keeps background fixed on scroll */
+        }
+        
+        /* Optional: adds a semi-transparent effect to the card for readability */
+        .card {
+            background-color: rgba(255, 255, 255, 0.8); /* White with 80% opacity */
+        }
+    </style>
+
 </head>
 
 <body class="container mt-5">
