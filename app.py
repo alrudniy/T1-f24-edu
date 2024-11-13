@@ -72,22 +72,22 @@ def create_account():
     return render_template('create_account.html')
 
 @app.route('/pick_a_path')
-@login_required  # Ensure this route is only accessible to logged-in users
+#@login_required  # Ensure this route is only accessible to logged-in users
 def pick_a_path():
     return render_template('pick_a_path.html')
 
 @app.route('/scenario1')
-@login_required
+#@login_required
 def scenario1():
     return render_template('scenario1.html')
 
 @app.route('/scenario2')
-@login_required
+#@login_required
 def scenario2():
     return render_template('scenario2.html')
 
 @app.route('/article1')
-@login_required
+#@login_required
 def article1():
     return render_template('article1.html')
 
