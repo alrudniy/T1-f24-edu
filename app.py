@@ -159,17 +159,10 @@ def logout():
     flash('You have been logged out', 'success')
     return redirect(url_for('login')) 
 
-
-
-
-
-
-
 @app.route('/emptypage')  
 @login_required  
 def emptypage():  
      return render_template('emptypage.html')   
- 
  
  
 @app.route('/emptypage2')  
