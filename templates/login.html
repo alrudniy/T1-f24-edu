@@ -13,104 +13,108 @@
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            color: #fff; /* White text for the entire page */
+            color: #fff;
             position: relative;
-            padding-top: 50px; /* Add space for the flash message */
+            padding-top: 50px;
         }
 
         .card {
-            background: #343a40; /* Dark gray background for the card */
-            color: #fff; /* White text in the card */
+            background: #343a40;
+            color: #fff;
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             overflow: hidden;
         }
 
-        .card img {
-            width: 100%; /* Make logo span the width of the card */
-            height: auto; /* Maintain aspect ratio */
-            display: block;
+        /* Unified logo styling */
+        .card .logo-container {
+            text-align: center;
+            background: #343a40; /* Match card background */
+            padding: 20px 0; /* Add padding for the logo */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle separator */
+        }
+
+        .card .logo-container img {
+            width: 300px;
+            filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.5));
         }
 
         .form-control {
-            background: #495057; /* Darker gray for input fields */
-            color: #fff; /* White text for inputs */
-            border: 1px solid #6c757d; /* Border matching the theme */
+            background: #495057;
+            color: #fff;
+            border: 1px solid #6c757d;
         }
 
         .form-control::placeholder {
-            color: #d6d6d6; /* Light gray placeholder text */
+            color: #d6d6d6;
         }
 
         .form-control:focus {
-            background: #495057; /* Keep the same background on focus */
-            border-color: #007bff; /* Blue border on focus */
-            color: #fff; /* Ensure text remains white */
-            box-shadow: none; /* Remove any default box shadow */
+            background: #495057;
+            border-color: #007bff;
+            color: #fff;
+            box-shadow: none;
         }
 
         .btn-primary {
-            background: #007bff; /* Primary button color */
+            background: #007bff;
             border: none;
-            color: #fff; /* White text */
-        }
-
-        .btn-primary:hover {
-            background: #0056b3; /* Darker blue on hover */
-        }
-
-        .btn-outline-secondary {
-            color: #fff; /* White text for the secondary button */
-            border-color: #fff; /* White border */
-        }
-
-        .btn-outline-secondary:hover {
-            background: #6c757d; /* Light gray on hover */
             color: #fff;
         }
 
-        /* Flash message alert */
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        .btn-outline-secondary {
+            color: #fff;
+            border-color: #fff;
+        }
+
+        .btn-outline-secondary:hover {
+            background: #6c757d;
+            color: #fff;
+        }
+
         .alert {
             position: absolute;
-            top: -100px; /* Start above the screen */
+            top: -100px;
             left: 50%;
             transform: translateX(-50%);
             margin: 0;
-            padding: 15px 30px; /* Slightly larger padding for the message */
-            background-color: #343a40; /* Match card color */
+            padding: 15px 30px;
+            background-color: #343a40;
             color: #fff;
             font-size: 1rem;
             text-align: center;
             z-index: 9999;
             border-radius: 0 0 10px 10px;
-            width: auto; /* Let the width adjust based on the text */
-            min-width: 200px; /* Set a minimum width */
-            opacity: 0; /* Initially hidden */
-            animation: slideIn 0.5s forwards, fadeOut 1s 5s forwards; /* Slide in and fade out */
+            width: auto;
+            min-width: 200px;
+            opacity: 0;
+            animation: slideIn 0.5s forwards, fadeOut 1s 5s forwards;
         }
 
-        /* Animation for sliding in */
         @keyframes slideIn {
             to {
-                top: 0; /* Slide to the top of the screen */
-                opacity: 1; /* Fully visible after animation */
+                top: 0;
+                opacity: 1;
             }
         }
 
-        /* Animation for fading out */
         @keyframes fadeOut {
             to {
-                opacity: 0; /* Fade the message out */
-                top: -100px; /* Slide up when fading out */
+                opacity: 0;
+                top: -100px;
             }
         }
 
         .alert-success {
-            background-color: #28a745; /* Green for success messages */
+            background-color: #28a745;
         }
 
         .alert-info {
-            background-color: #17a2b8; /* Blue for info messages */
+            background-color: #17a2b8;
         }
     </style>
 </head>
@@ -128,8 +132,10 @@
 
     <!-- Main content card -->
     <div class="card w-100" style="max-width: 400px;">
-        <!-- Integrated logo at the top of the card -->
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+        <!-- Logo included in the card -->
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Family Promise Logo">
+        </div>
         <div class="p-4">
             <h2 class="text-center mb-4">Welcome Back</h2>
             <form method="post">
@@ -155,10 +161,9 @@
         window.addEventListener('DOMContentLoaded', (event) => {
             const alert = document.querySelector('.alert');
             if (alert) {
-                // Fade out the message after 5 seconds
                 setTimeout(() => {
-                    alert.classList.add('fade-out'); // Apply the fade-out animation class
-                }, 5000); // Wait 5 seconds before fading out the message
+                    alert.classList.add('fade-out');
+                }, 5000);
             }
         });
     </script>
