@@ -78,15 +78,16 @@
             { text: 'Hello! How are you?', type: 'sent' },
             { text: "I'm good, thanks! How about you?", type: 'received' },
             { text: 'Doing well, thank you!', type: 'sent' },
-            { text: 'Glad to hear that!', type: 'received' },
             { text: 'I have a voucher through the state voucher housing program. What accommodations could you make?', type: 'received' },
-            { text: 'I can lower the price by $500 per month! Wow!', type: 'sent' },
             { choices: [
                 { text: 'We can discuss lowering the rent price further.', isCorrect: false, explanation: 'This answer is too ambiguous and doesn\'t offer a concrete solution.' },
                 { text: 'We can offer a payment plan.', isCorrect: false, explanation: 'This doesn\'t address the question of specific accommodations.' },
-                { text: 'We accept vouchers and can offer a reduced rent of $1000 per month.', isCorrect: true, explanation: 'This provides a direct and helpful answer to the accommodation inquiry.' }
+                { text: 'We accept vouchers and can offer a reduced rent of $1500 per month.', isCorrect: true, explanation: 'This provides a direct and helpful answer to the accommodation inquiry.' }
             ],
-            nextMessage: { text: 'Thank you for understanding our policies.', type: 'received' } },
+            nextMessage: { text: 'Thank you! I massively appreciate this opportunity.', type: 'received' } },
+            { text: "This is great! I'm so excited to have a new tenant.", type : 'sent'},
+            { text: "My family will be so excited to finally have a home for Christmas.", type : 'received'},
+            { text: "I'm so happy for you.", type : 'sent'}
             // Add more pre-scripted messages and choices here
         ];
 
