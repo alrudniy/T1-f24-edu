@@ -100,4 +100,3 @@ def logout():
 
 if __name__ == '__main__':
     app.run(debug=True)
-    print("Aider is working with Gemini!")
