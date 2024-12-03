@@ -23,7 +23,4 @@ def test_invalid_login():
     error_message = driver.find_element(By.CLASS_NAME, "flash-error") # Assuming you use a 'flash-error' class for error messages
     assert error_message.is_displayed()
     assert "Invalid username or password" in error_message.text # Check for the specific error message
-    try:
-        # ... rest of your test code ...
-    finally:
-        driver.quit() # Close the browser window when the test is done, even if it fails
+    driver.quit() # Close the browser window when the test is done
