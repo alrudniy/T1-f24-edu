@@ -2,7 +2,7 @@ import unittest
 from app import app, db_session, User  # Import necessary components from your app
 from flask import Flask, session
 from werkzeug.security import generate_password_hash
-from flask_login import LoginManager, login_user
+from flask_login import LoginManager, login_user, current_user
 
 class TestLogin(unittest.TestCase):
 
