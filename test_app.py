@@ -41,9 +41,10 @@ class TestLogin(unittest.TestCase):
         # Check that the user is redirected to the pick_a_path page
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'pick_a_path', response.data)
-        # Check that the user is logged in
-        with self.app.session_transaction() as sess:
-            self.assertIn('user_id', sess)
+        # Check that the user is logged in (using current_user)
+        with self.app.test_request_context('/'): # Needed for current_user to work
+            self.assertTrue(current_user.is_authenticated)
+
 
 if __name__ == '__main__':
     unittest.main()

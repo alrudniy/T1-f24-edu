@@ -36,10 +36,18 @@ Session = sqlalchemy.orm.sessionmaker()
 Session.configure(bind=engine)
 db_session = Session()
 
+from sqlalchemy.exc import IntegrityError
+
 def addUser(userName, passWord, firstName, lastName):
-    newUser = User(username=userName, password=passWord, firstname=firstName, lastname=lastName, active=True)
-    db_session.add(newUser)
-    db_session.commit()
+    try:
+        newUser = User(username=userName, password=passWord, firstname=firstName, lastname=lastName, active=True)
+        db_session.add(newUser)
+        db_session.commit()
+        return True  # Indicate success
+    except IntegrityError as e:
+        db_session.rollback()  # Rollback the session in case of error
+        print(f"Error adding user: {e}")  # Log the error for debugging
+        return False  # Indicate failure
 
 # Flask-Login user loader
 @login_manager.user_loader
