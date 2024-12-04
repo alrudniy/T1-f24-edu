@@ -54,6 +54,8 @@
         <p>Congratulations, you have completed the scenario!</p> 
         {% if current_user.is_authenticated %}
             <a href="{{ url_for('survey') }}">Continue to Survey (Optional)</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Log in to take survey</a>
         {% endif %}
     </div>
 </body>
