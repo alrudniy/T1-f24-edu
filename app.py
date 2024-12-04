@@ -12,8 +12,8 @@ app.config['SECRET_KEY'] = 'csci400_random_string_as_secret_key'
 # Configure the database URI for SQLAlchemy
 username = 't1'  # Replace with actual username
 password = 'YWQQEg1QwgVTc40K'  # Replace with actual password
-#engine = sqlalchemy.create_engine(f"mariadb+mariadbconnector://{username}:{password}@34.125.69.91/f24_housing_db")
-engine = sqlalchemy.create_engine(f"mysql+pymysql://{username}:{password}@34.125.69.91/f24_housing_db", connect_args={'ssl': {'disabled': True}})
+engine = sqlalchemy.create_engine(f"mariadb+mariadbconnector://{username}:{password}@34.125.69.91/f24_housing_db")
+
 
 Base = declarative_base()
 
@@ -193,6 +193,8 @@ def article1():
 def end():
     return render_template('end.html')
 
+
+
 @app.route('/landlord_experience')
 @login_required
 def landlord_experience():
@@ -224,7 +226,15 @@ def emptypage():
 @app.route('/emptypage2')  
 @login_required  
 def emptypage2():  
-     return render_template('emptypage2.html')  
+     return render_template('emptypage2.html')   
+ 
+ 
+
+
+@app.route('/survey') 
+@login_required
+def survey():
+    return render_template('survey.html')
 
 
 
