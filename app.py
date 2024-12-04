@@ -3,6 +3,8 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
 from werkzeug.security import generate_password_hash, check_password_hash
+import pymysql
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'csci400_random_string_as_secret_key'
@@ -52,12 +54,21 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+
+        if not username or len(username) < 3:
+            flash('Invalid username. Must be at least 3 characters.', 'error')
+            return render_template('login.html')  # Redisplay the form with the error
+
+        if not password or len(password) < 6:
+            flash('Invalid password. Must be at least 6 characters.', 'error')
+            return render_template('login.html')
+
         user = db_session.query(User).filter_by(username=username).first()
         if user and check_password_hash(user.password, password):
-            login_user(user)  # Log in the user with Flask-Login
+            login_user(user)
             return redirect(url_for('pick_a_path'))
         else:
-            flash('Invalid username or password', 'error')
+            flash('Invalid username or password', 'error')  # Incorrect credentials
     return render_template('login.html')
 
 @app.route('/create_account', methods=['GET', 'POST'])
@@ -194,6 +205,10 @@ def landlord_experience():
 def text_message_visual():
     return render_template('text_message_visual.html')
 
+# @app.route('/text_message_visual_3')
+# @login_required
+# def text_message_visual_3():
+#     return render_template('text_message_visual_3.html')
 
 @app.route('/logout')
 @login_required
@@ -206,7 +221,6 @@ def logout():
 @login_required  
 def emptypage():  
      return render_template('emptypage.html')   
- 
  
  
 @app.route('/emptypage2')  
@@ -225,5 +239,9 @@ def survey():
 
 
 if __name__ == '__main__':
+    # Check if the script is being run directly (not imported as a module)
+    if os.environ.get("WERKZEUG_RUN_MAIN") != "true": # Prevents running twice when using 'flask run'
+        db_session.remove() # Close the database session when the app shuts down
+        engine.dispose() # Dispose of the engine to release resources
     app.run(debug=True)
     print("Aider is working with Gemini!")

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scripted Chat Application - Scenario 3</title>
+    <style>
+        /* ... (same CSS as text_message_visual.html) ... */
+    </style>
+</head>
+<body>
+    <div class="chat-container" id="chatContainer">
+        <!-- Pre-scripted messages will be appended here -->
+    </div>
+
+    <div class="input-container">
+        <button onclick="nextMessage()">Next</button>
+    </div>
+
+    <div class="choice-container" id="choiceContainer" style="display:none;">
+        <div class="choice-prompt" id="choicePrompt">What would be the best response?</div>
+        <button onclick="selectChoice(0)">Choice 1</button>
+        <button onclick="selectChoice(1)">Choice 2</button>
+        <button onclick="selectChoice(2)">Choice 3</button>
+    </div>
+
+    <script>
+        const messages = [
+            { text: 'Hi, is the apartment still available?', type: 'received' },
+            { text: 'Yes, it is!', type: 'sent' },
+            { text: 'Great! What are the next steps to apply?', type: 'received' },
+            { choices: [
+                { text: 'Just send me some money and it\'s yours!', isCorrect: false, explanation: 'This is unprofessional and potentially illegal.' },
+                { text: 'You can fill out an application on our website.', isCorrect: true, explanation: 'This is the standard and appropriate process.' },
+                { text: 'I\'ll get back to you in a few weeks.', isCorrect: false, explanation: 'This is unhelpful and doesn\'t move the process forward.' }
+            ],
+            nextMessage: { text: 'Perfect, I\'ll do that right away.', type: 'received' } },
+            { text: "Great! Let me know if you have any questions.", type : 'sent'}
+        ];
+
+        // ... (same JavaScript functions as text_message_visual.html) ...
+    </script>
+</body>
+</html>
