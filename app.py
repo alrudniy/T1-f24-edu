@@ -3,7 +3,6 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
 from werkzeug.security import generate_password_hash, check_password_hash
-import pymysql
 import os
 
 app = Flask(__name__)
@@ -193,8 +192,6 @@ def article1():
 def end():
     return render_template('end.html')
 
-
-
 @app.route('/landlord_experience')
 #login_required
 def landlord_experience():
@@ -227,8 +224,6 @@ def emptypage():
 @login_required  
 def emptypage2():  
      return render_template('emptypage2.html')   
- 
- 
 
 
 @app.route('/survey') 
