@@ -84,7 +84,7 @@ def create_account():
     return render_template('create_account.html')
 
 from flask import Flask, render_template, request, redirect, url_for, flash
-from itsdangerous import URLSafeTimedSerializer  # For generating tokens
+from itsdangerous import URLSafeTimedSerializer  # For generating time sensitive tokens
 
 # Secret key for generating tokens
 s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
@@ -92,58 +92,99 @@ s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
 @app.route('/forgot_password', methods=['GET', 'POST'])
 def forgot_password():
     if request.method == 'POST':
-        username = request.form['username']
-        user = db_session.query(User).filter_by(username=username).first()
+        email = request.form['email']
         
+        # For now, assuming the email is used as the username.
+        user = db_session.query(User).filter_by(username=email).first()
+
+        # If user exists, proceed to send reset email
         if user:
-            # Generate token for the user
-            token = s.dumps(user.username, salt='password-reset-salt')
-            reset_url = url_for('reset_password', token=token, _external=True)
+            # Generate a token using the email (which is used as the username for now)
+            token = s.dumps(email, salt='password-reset-salt')
             
-            # Send this URL to the user via email (pseudo-code below)
-            # send_email(user.email, reset_url)
-            flash('A password reset link has been sent to your email.', 'info')
+            # Create reset URL with token
+            reset_url = url_for('reset_password', token=token, _external=True)
+
+            # Create the email message
+            message = Message(
+                'Password Reset Request',
+                recipients=[email],  # Send to the user's email
+                body=f"To reset your password, visit the following link:\n{reset_url}"
+            )
+
+            try:
+                mail.send(message) # Sends the email with the reset link
+                flash('A password reset link has been sent to your email.', 'info')
+            except Exception as e:
+                flash('There was an error sending the email. Please try again later.', 'error')
+                app.logger.error(f"Error sending password reset email: {e}")
         else:
-            flash('User not found.', 'error')
+            flash('No user found with that email address.', 'error')
     
     return render_template('forgot_password.html')
 
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
     try:
-        username = s.loads(token, salt='password-reset-salt', max_age=3600)  # Token is valid for 1 hour
+        # Decode the email (which is used as the username for now) from the token
+        email = s.loads(token, salt='password-reset-salt', max_age=3600)  # Token expires after 1 hour
     except:
         flash('The reset link is invalid or has expired.', 'error')
         return redirect(url_for('forgot_password'))
     
     if request.method == 'POST':
-        user = db_session.query(User).filter_by(username=username).first()
+        new_password = request.form['password']
+        confirm_password = request.form['confirm_password']
+        
+        if new_password != confirm_password:
+            flash('Passwords do not match. Please try again.', 'error')
+            return render_template('reset_password.html', token=token)
+        
+        # Find user by email (which is used as the username for now)
+        user = db_session.query(User).filter_by(username=email).first()
+
         if user:
-            new_password = generate_password_hash(request.form['password'], method='scrypt')
-            user.password = new_password
+            # Update the user's password
+            user.password = generate_password_hash(new_password, method='scrypt')
             db_session.commit()
             flash('Your password has been updated!', 'success')
-            return redirect(url_for('login'))
+            return redirect(url_for('login'))  # Redirect back to the login page
+        else:
+            flash('No user found with that email address.', 'error')
     
     return render_template('reset_password.html')
 
+from flask_mail import Mail, Message
+
+# The email is sent through Gmail’s SMTP server (smtp.gmail.com). It’s configured to use SSL for secure transmission.
+# Configure email settings
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465  # SSL port for Gmail
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USERNAME'] = 'familypromise.noreply@gmail.com'  # Replace with your email
+app.config['MAIL_PASSWORD'] = 'xpxa ajng cyyb ojtn'  # Replace with your email password (or app-specific password)
+app.config['MAIL_DEFAULT_SENDER'] = 'familypromise.noreply@gmail.com'  # Default sender
+
+# Initialize Flask-Mail
+mail = Mail(app)
+
 @app.route('/pick_a_path')
-@login_required  # Ensure this route is only accessible to logged-in users
+#@login_required  # Ensure this route is only accessible to logged-in users
 def pick_a_path():
     return render_template('pick_a_path.html')
 
 @app.route('/scenario1')
-@login_required
+#@login_required
 def scenario1():
     return render_template('scenario1.html')
 
 @app.route('/scenario2')
-@login_required
+#@login_required
 def scenario2():
     return render_template('scenario2.html')
 
 @app.route('/article1')
-@login_required
+#@login_required
 def article1():
     return render_template('article1.html')
 
@@ -193,3 +234,4 @@ if __name__ == '__main__':
         db_session.remove() # Close the database session when the app shuts down
         engine.dispose() # Dispose of the engine to release resources
     app.run(debug=True)
+    print("Aider is working with Gemini!")
