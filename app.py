@@ -4,6 +4,7 @@ import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
 from werkzeug.security import generate_password_hash, check_password_hash
 import pymysql
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'csci400_random_string_as_secret_key'
@@ -74,7 +75,6 @@ def create_account():
     return render_template('create_account.html')
 
 from flask import Flask, render_template, request, redirect, url_for, flash
-import os
 from itsdangerous import URLSafeTimedSerializer  # For generating tokens
 
 # Secret key for generating tokens
@@ -174,9 +174,6 @@ def emptypage2():
 
 
 if __name__ == '__main__':
-    if app.config.get("TESTING"): # Check if in testing mode
-        db_session.remove()
-        engine.dispose()
     # Check if the script is being run directly (not imported as a module)
     if os.environ.get("WERKZEUG_RUN_MAIN") != "true": # Prevents running twice when using 'flask run'
         db_session.remove() # Close the database session when the app shuts down
