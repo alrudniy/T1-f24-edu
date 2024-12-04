@@ -188,7 +188,6 @@ def article1():
     return render_template('article1.html')
 
 @app.route('/end')
-@login_required
 def end():
     return render_template('end.html')
 
