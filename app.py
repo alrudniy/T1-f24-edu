@@ -225,9 +225,12 @@ def emptypage2():
      return render_template('emptypage2.html')   
 
 
-@app.route('/survey') 
+@app.route('/survey', methods=['GET', 'POST'])
 @login_required
 def survey():
+    if request.method == 'POST':
+        # ... (process survey data here if needed) ...
+        return render_template('survey_submitted.html')
     return render_template('survey.html')
 
 

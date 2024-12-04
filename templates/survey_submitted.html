@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>End</title>
+    <title>Thank You</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -50,11 +50,9 @@
 </head>
 <body>
     <div class="container">
-        <h1>End Page</h1>
-        <p>Congratulations, you have completed the scenario!</p> 
-        {% if current_user.is_authenticated %}
-            <a href="{{ url_for('survey') }}">Continue to Survey (Optional)</a>
-        {% endif %}
+        <h1>Thank You!</h1>
+        <p>Your feedback has been submitted.</p>
+        <a href="{{ url_for('pick_a_path') }}">Return to Pick a Path</a>
     </div>
 </body>
 </html>
