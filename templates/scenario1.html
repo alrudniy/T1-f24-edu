@@ -207,7 +207,6 @@
             <input type="text" id="input-message" placeholder="Type a message...">
             <button id="send-button">Send</button>
         </div>
-    </div>
 
     <script>
         // Handle the Send button click
@@ -236,6 +235,10 @@
             }
         });
     </script>
+      
+    <ul class="list-group">
+        <li class="list-group-item"><a href="{{ url_for('end') }}">Complete</a></li>
+    </ul>
 
 </body>
 </html>

@@ -178,19 +178,19 @@ def article1():
     return render_template('article1.html')
 
 @app.route('/end')
-@login_required
+#login_required
 def end():
     return render_template('end.html')
 
 
 
 @app.route('/landlord_experience')
-@login_required
+#login_required
 def landlord_experience():
     return render_template('landlord_experience.html')
 
 @app.route('/text_message_visual')
-@login_required
+#login_required
 def text_message_visual():
     return render_template('text_message_visual.html')
 
