@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Survey</title>
+</head>
+<body>
+    <h1>Survey</h1>
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="email">(Optional) Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        
+        <label for="age">Age:</label>
+        <select id="age bracket" name="age" required>
+            <option value="">Select Age Bracket</option>
+            <option value="male">18-27</option>
+            <option value="female">27-37</option>
+            <option value="other">37-50</option> 
+            <option value="other">50+</option> 
+            <option value="other">Prefer Not to Answer</option>
+        </select><br><br>
+        
+
+
+
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="">Select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option> 
+            <option value="other">Prefer Not to Answer</option>  
+            </select><br><br>
+        
+        <label for="feedback">Feedback:</label><br>
+        <textarea id="feedback" name="feedback" rows="4" cols="50" required></textarea><br><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
