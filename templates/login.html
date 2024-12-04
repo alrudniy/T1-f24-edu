@@ -177,48 +177,5 @@
         });
     </script>
 
-
-<body background="{{ url_for('static', filename='images/titlebg.png') }}" class="container mt-5">
-    <!-- Main body starts here with a container class for Bootstrap styling -->
-    
-    <!-- Logo Section: Displays a centered logo at the top of the page -->
-    <div class="text-center mb-4">
-        <!-- Image element with the source path to your logo, an alt attribute, and inline width styling -->
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" style="width: 350px;">
-    </div>
-
-    <!-- Main content card with padding and shadow for styling -->
-    <div class="card p-5 shadow-sm">
-        
-        <!-- Heading for the Login form, centered horizontally -->
-        <h2 class="text-center">Login</h2>
-        
-        <!-- Form to collect username and password, using POST method for secure data submission -->
-        <form method="post" class="mt-3">
-            
-            <!-- Username input field with margin-bottom for spacing and Bootstrap's form control styling -->
-            <div class="mb-3">
-                <input type="text" class="form-control" name="username" placeholder="Username" required>
-            </div>
-            
-            <!-- Password input field with similar styling as the username field -->
-            <div class="mb-3">
-                <input type="password" class="form-control" name="password" placeholder="Password" required>
-            </div>
-            
-            <!-- Submit button that spans full width with Bootstrap's 'w-100' class -->
-            <button type="submit" class="btn btn-primary w-100">Login</button>
-        </form>
-
-        
-        <!-- Link to the account creation page, centered below the form for users who need to sign up -->
-        <p class="mt-3 text-center">
-            Don't have an account? <a href="{{ url_for('create_account') }}">Create one here</a>.
-            Forgot password? <a href="{{ url_for('forgot_password') }}">Reset here</a>.
-        </p>
-      
-    </div>
-
-
 </body>
 </html>
