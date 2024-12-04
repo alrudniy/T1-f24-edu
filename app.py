@@ -210,7 +210,15 @@ def emptypage():
 @app.route('/emptypage2')  
 @login_required  
 def emptypage2():  
-     return render_template('emptypage2.html')  
+     return render_template('emptypage2.html')   
+ 
+ 
+
+
+@app.route('/survey') 
+@login_required
+def survey():
+    return render_template('survey.html')
 
 
 
