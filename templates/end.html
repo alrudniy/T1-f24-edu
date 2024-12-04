@@ -18,16 +18,18 @@
             your reward. </p>
 
         <!-- Login/Create Account Links -->
-            <ul class="list-group">
-                <li class="list-group-item"><a href="{{ url_for('login') }}">Login</a></li>
-                <li class="list-group-item"><a href="{{ url_for('create_account') }}">Create Account</a></li>
-            </ul>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="{{ url_for('login') }}">Login</a></li>
+            <li class="list-group-item"><a href="{{ url_for('create_account') }}">Create Account</a></li>
+        </ul>
 
         <!-- Optional Survey Section -->
         <h2 class="text-center">Optional Survey</h2>
         <p>Please fill out our survey to help us improve the property owner education experience!</p>
 
-
         <ul class="list-group">
-            <li class="list-group-item"><a href="{{ url_for('survey1') }}">Take Survey</a></li>
+            <li class="list-group-item"><a href="{{ url_for('survey') }}">Take Survey</a></li>
         </ul>
+    </div>
+</body>
+</html>
