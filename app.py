@@ -74,6 +74,7 @@ def create_account():
     return render_template('create_account.html')
 
 from flask import Flask, render_template, request, redirect, url_for, flash
+import os
 from itsdangerous import URLSafeTimedSerializer  # For generating tokens
 
 # Secret key for generating tokens
