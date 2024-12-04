@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scenario 1 Conversation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolpEjRxstYhEfiaLlRhIbzF1Fo/cISgY28iWhp/txbQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         body {
@@ -16,12 +15,25 @@
             align-items: center;
             height: 100vh;
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa; /* Light gray */
         }
 
-        /* Remove the gradient background */
+        /* Background with purple, yellow, and white gradient */
         body::before {
-            display: none;
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                #f9f9f9 0%,      /* Soft white */
+                #6a0dad 25%,     /* Purple */
+                #f0e68c 50%,     /* Light yellow */
+                #f9f9f9 75%,     /* Soft white */
+                #6a0dad 100%     /* Purple */
+            );
+            z-index: -1;
         }
 
         .phone-container {
@@ -30,8 +42,8 @@
             height: 90%;
             max-height: 700px;
             background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 40px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Softer shadow */
+            border-radius: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -39,13 +51,13 @@
         }
 
         .header {
-            background-color: #343a40; /* Dark gray */
-            color: white;
+            background-color: #6a0dad;
+            color: #fff;
             text-align: center;
             position: relative;
-            padding: 18px 0;
+            padding: 10px 0;
             font-weight: bold;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
         .header a {
@@ -56,14 +68,14 @@
             text-decoration: none;
             color: #fff;
             font-size: 0.9rem;
-            background: #007bff; /* Blue */
+            background: #f0e68c;
             padding: 5px 15px;
             border-radius: 15px;
             transition: background 0.3s;
         }
 
         .header a:hover {
-            background: #0056b3; /* Darker blue */
+            background: #e6c200;
         }
 
         .chat {
@@ -93,7 +105,9 @@
         }
 
         .message.receiver p {
-            background-color: #e9ecef; /* Lighter gray */
+            background-color: #f9f9f9;
+            color: #555;
+            border-bottom-left-radius: 0;
         }
 
         .message.sender {
@@ -101,7 +115,8 @@
         }
 
         .message.sender p {
-            background-color: #ADD8E6; /* Light blue */
+            background-color: #f0e68c;
+            color: #333;
             border-bottom-right-radius: 0;
         }
 
@@ -119,39 +134,35 @@
         .input-container {
             display: flex;
             align-items: center;
-            padding: 15px;
-            background-color: #f8f9fa; /* Light gray to match body */
-            border-top: none;
+            padding: 10px;
+            background-color: #6a0dad;
+            border-top: 1px solid #f0e68c;
         }
 
         .input-container input {
             flex-grow: 1;
-            padding: 10px 15px;
-            background: #fff;
+            padding: 10px;
+            background: #f9f9f9;
             color: #555;
-            border: none; /* Remove border */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
-            border-radius: 25px;
+            border: 1px solid #dcdcdc;
+            border-radius: 20px;
             font-size: 1rem;
             outline: none;
         }
 
         .input-container button {
             margin-left: 10px;
-            padding: 10px 20px;
-            background-color: #007bff; /* Blue */
-            color: #fff;
+            padding: 8px 15px;
+            background: #f0e68c;
+            color: #333;
             border: none;
-            border-radius: 25px;
+            border-radius: 20px;
             font-size: 1rem;
             cursor: pointer;
         }
 
         .input-container button:hover {
-            background-color: #0056b3; /* Darker blue */
-        }
-        .input-container i {  /* Style for the send icon */
-            font-size: 1.2rem;
+            background: #e6c200;
         }
     </style>
 </head>
@@ -194,7 +205,7 @@
         <!-- Input container -->
         <div class="input-container">
             <input type="text" id="input-message" placeholder="Type a message...">
-            <button id="send-button"><i class="fas fa-paper-plane"></i></button> 
+            <button id="send-button">Send</button>
         </div>
 
     <script>
