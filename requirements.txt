@@ -4,4 +4,3 @@ Werkzeug
 mariadb
 flask_login
 flask-testing
-pymysql
