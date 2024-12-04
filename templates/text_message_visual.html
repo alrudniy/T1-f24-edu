@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Message Layout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .message {
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px 0;
+            max-width: 80%;
+        }
+        .sent {
+            background-color: #dcf8c6;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        .received {
+            background-color: #ebebeb;
+            align-self: flex-start;
+            margin-right: auto;
+        }
+        .forward-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .forward-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="message received">Hey there! How are you?</div>
+        <div class="message sent">I'm good, thanks! How about you?</div>
+        <button class="forward-button" onclick="addNewMessage()">Forward</button>
+    </div>
+
+    <script>
+        let messages = [
+            "Sure, sounds good!",
+            "I'll be there in 5 minutes.",
+            "Don't forget to bring the documents.",
+            "Thank you for your help!",
+            "Can we reschedule our meeting?"
+        ];
+        let messageIndex = 0;
+
+        function addNewMessage() {
+            if (messageIndex < messages.length) {
+                let container = document.querySelector('.container');
+                let newMessage = document.createElement('div');
+                newMessage.classList.add('message', 'received');
+                newMessage.textContent = messages[messageIndex];
+                container.insertBefore(newMessage, container.querySelector('.forward-button'));
+                messageIndex++;
+            } else {
+                alert("No more messages to display.");
+            }
+        }
+    </script>
+</body>
+</html>
