@@ -182,6 +182,8 @@ def article1():
 def end():
     return render_template('end.html')
 
+
+
 @app.route('/landlord_experience')
 @login_required
 def landlord_experience():
@@ -191,6 +193,7 @@ def landlord_experience():
 @login_required
 def text_message_visual():
     return render_template('text_message_visual.html')
+
 
 @app.route('/logout')
 @login_required
@@ -209,7 +212,15 @@ def emptypage():
 @app.route('/emptypage2')  
 @login_required  
 def emptypage2():  
-     return render_template('emptypage2.html')  
+     return render_template('emptypage2.html')   
+ 
+ 
+
+
+@app.route('/survey') 
+@login_required
+def survey():
+    return render_template('survey.html')
 
 
 
