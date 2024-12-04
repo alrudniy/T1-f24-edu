@@ -24,9 +24,20 @@ class TestLogin(unittest.TestCase):
 
     def test_empty_password(self):
         response = self.app.post('/', data=dict(username='test', password=''), follow_redirects=True)
-        self.assertIn(b'Invalid username or password', response.data)
+        self.assertIn(b'Invalid username. Must be at least 3 characters.', response.data)
 
-    # Add more tests for specific username formats and password requirements as needed
+    def test_short_username(self):
+        response = self.app.post('/', data=dict(username='ab', password='test123456'), follow_redirects=True)
+        self.assertIn(b'Invalid username. Must be at least 3 characters.', response.data)
+
+    def test_empty_password(self):
+        response = self.app.post('/', data=dict(username='testuser', password=''), follow_redirects=True)
+        self.assertIn(b'Invalid password. Must be at least 6 characters.', response.data)
+
+    def test_short_password(self):
+        response = self.app.post('/', data=dict(username='testuser', password='12345'), follow_redirects=True)
+        self.assertIn(b'Invalid password. Must be at least 6 characters.', response.data)
+
 
 if __name__ == '__main__':
     unittest.main()

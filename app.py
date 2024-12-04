@@ -54,12 +54,21 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+
+        if not username or len(username) < 3:
+            flash('Invalid username. Must be at least 3 characters.', 'error')
+            return render_template('login.html')  # Redisplay the form with the error
+
+        if not password or len(password) < 6:
+            flash('Invalid password. Must be at least 6 characters.', 'error')
+            return render_template('login.html')
+
         user = db_session.query(User).filter_by(username=username).first()
         if user and check_password_hash(user.password, password):
-            login_user(user)  # Log in the user with Flask-Login
+            login_user(user)
             return redirect(url_for('pick_a_path'))
         else:
-            flash('Invalid username or password', 'error')
+            flash('Invalid username or password', 'error')  # Incorrect credentials
     return render_template('login.html')
 
 @app.route('/create_account', methods=['GET', 'POST'])
