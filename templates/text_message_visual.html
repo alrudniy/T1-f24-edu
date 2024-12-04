@@ -3,82 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Message Layout</title>
+    <title>Scripted Chat Application</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 20px;
         }
-        .container {
+        .chat-container {
+            display: flex;
+            flex-direction: column;
             max-width: 600px;
-            margin: auto;
-            background-color: white;
-            padding: 20px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            padding: 10px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
         }
         .message {
             padding: 10px;
+            margin: 5px 0;
             border-radius: 10px;
-            margin: 10px 0;
-            max-width: 80%;
+            max-width: 75%;
         }
         .sent {
-            background-color: #dcf8c6;
             align-self: flex-end;
-            margin-left: auto;
+            background-color: #dcf8c6;
         }
         .received {
-            background-color: #ebebeb;
             align-self: flex-start;
-            margin-right: auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
         }
-        .forward-button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #4caf50;
-            color: white;
+        .input-container, .choice-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .input-container button, .choice-container button {
+            padding: 10px;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
+            background-color: #4caf50;
+            color: #fff;
             cursor: pointer;
+            margin: 0 5px;
         }
-        .forward-button:hover {
+        .input-container button:hover, .choice-container button:hover {
             background-color: #45a049;
+        }
+        .choice-prompt {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="message received">Hey there! How are you?</div>
-        <div class="message sent">I'm good, thanks! How about you?</div>
-        <button class="forward-button" onclick="addNewMessage()">Forward</button>
+    <div class="chat-container" id="chatContainer">
+        <!-- Pre-scripted messages will be appended here -->
+    </div>
+
+    <div class="input-container">
+        <button onclick="nextMessage()">Next</button>
+    </div>
+
+    <div class="choice-container" id="choiceContainer" style="display:none;">
+        <div class="choice-prompt" id="choicePrompt">What would be the best response?</div>
+        <button onclick="selectChoice(0)">Choice 1</button>
+        <button onclick="selectChoice(1)">Choice 2</button>
+        <button onclick="selectChoice(2)">Choice 3</button>
     </div>
 
     <script>
-        let messages = [
-            "Sure, sounds good!",
-            "I'll be there in 5 minutes.",
-            "Don't forget to bring the documents.",
-            "Thank you for your help!",
-            "Can we reschedule our meeting?"
+        const messages = [
+            { text: 'Hello! How are you?', type: 'sent' },
+            { text: "I'm good, thanks! How about you?", type: 'received' },
+            { text: 'Doing well, thank you!', type: 'sent' },
+            { text: 'I have a voucher through the state voucher housing program. What accommodations could you make?', type: 'received' },
+            { choices: [
+                { text: 'We can discuss lowering the rent price further.', isCorrect: false, explanation: 'This answer is too ambiguous and doesn\'t offer a concrete solution.' },
+                { text: 'We can offer a payment plan.', isCorrect: false, explanation: 'This doesn\'t address the question of specific accommodations.' },
+                { text: 'We accept vouchers and can offer a reduced rent of $1500 per month.', isCorrect: true, explanation: 'This provides a direct and helpful answer to the accommodation inquiry.' }
+            ],
+            nextMessage: { text: 'Thank you! I massively appreciate this opportunity.', type: 'received' } },
+            { text: "This is great! I'm so excited to have a new tenant.", type : 'sent'},
+            { text: "My family will be so excited to finally have a home for Christmas.", type : 'received'},
+            { text: "I'm so happy for you.", type : 'sent'}
+            // Add more pre-scripted messages and choices here
         ];
-        let messageIndex = 0;
 
-        function addNewMessage() {
-            if (messageIndex < messages.length) {
-                let container = document.querySelector('.container');
-                let newMessage = document.createElement('div');
-                newMessage.classList.add('message', 'received');
-                newMessage.textContent = messages[messageIndex];
-                container.insertBefore(newMessage, container.querySelector('.forward-button'));
-                messageIndex++;
-            } else {
-                alert("No more messages to display.");
+        let currentMessageIndex = 0;
+
+        function addMessage(text, type) {
+            const messageContainer = document.createElement('div');
+            messageContainer.classList.add('message');
+            messageContainer.classList.add(type);
+            messageContainer.textContent = text;
+            document.getElementById('chatContainer').appendChild(messageContainer);
+        }
+
+        function nextMessage() {
+            if (currentMessageIndex < messages.length) {
+                const message = messages[currentMessageIndex];
+
+                if (message.choices) {
+                    displayChoices(message.choices);
+                } else {
+                    addMessage(message.text, message.type);
+                    currentMessageIndex++;
+                    // Check for next normal message after choice
+                    if (message.nextMessage) {
+                        addMessage(message.nextMessage.text, message.nextMessage.type);
+                        currentMessageIndex++;
+                    }
+                }
             }
         }
+
+        function displayChoices(choices) {
+            document.getElementById('choiceContainer').style.display = 'flex';
+            document.querySelector('.input-container').style.display = 'none';
+            const buttons = document.querySelectorAll('.choice-container button');
+            buttons.forEach((button, index) => {
+                button.textContent = choices[index].text;
+                button.onclick = () => selectChoice(index);
+            });
+        }
+
+        function selectChoice(index) {
+            const message = messages[currentMessageIndex];
+            const choice = message.choices[index];
+
+            if (choice.isCorrect) {
+                addMessage(choice.text, 'sent');
+                currentMessageIndex++;
+                document.getElementById('choiceContainer').style.display = 'none';
+                document.querySelector('.input-container').style.display = 'flex';
+                // Add next message if exists after correct choice
+                if (message.nextMessage) {
+                    addMessage(message.nextMessage.text, message.nextMessage.type);
+                    currentMessageIndex++;
+                }
+                nextMessage();
+            } else {
+                alert('Incorrect: ' + choice.explanation);
+            }
+        }
+
+        // Display the first message initially
+        nextMessage();
     </script>
 </body>
 </html>
