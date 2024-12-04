@@ -173,4 +173,8 @@ def emptypage2():
 
 
 if __name__ == '__main__':
+    # Check if the script is being run directly (not imported as a module)
+    if os.environ.get("WERKZEUG_RUN_MAIN") != "true": # Prevents running twice when using 'flask run'
+        db_session.remove() # Close the database session when the app shuts down
+        engine.dispose() # Dispose of the engine to release resources
     app.run(debug=True)
