@@ -193,8 +193,6 @@ def article1():
 def end():
     return render_template('end.html')
 
-
-
 @app.route('/landlord_experience')
 @login_required
 def landlord_experience():
