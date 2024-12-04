@@ -161,10 +161,6 @@ def logout():
 
 
 
-
-
-
-
 @app.route('/emptypage')  
 @login_required  
 def emptypage():  
