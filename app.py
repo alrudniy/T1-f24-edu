@@ -162,6 +162,11 @@ def landlord_experience():
 def text_message_visual():
     return render_template('text_message_visual.html')
 
+# @app.route('/text_message_visual_3')
+# @login_required
+# def text_message_visual_3():
+#     return render_template('text_message_visual_3.html')
+
 @app.route('/logout')
 @login_required
 def logout():
