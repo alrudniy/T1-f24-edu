@@ -183,6 +183,8 @@ def article1():
 def end():
     return render_template('end.html')
 
+
+
 @app.route('/landlord_experience')
 @login_required
 def landlord_experience():
@@ -192,6 +194,7 @@ def landlord_experience():
 @login_required
 def text_message_visual():
     return render_template('text_message_visual.html')
+
 
 @app.route('/logout')
 @login_required
