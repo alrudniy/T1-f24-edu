@@ -34,12 +34,11 @@
             overflow: hidden;
         }
 
-        /* Unified logo styling */
         .card .logo-container {
             text-align: center;
-            background: #343a40; /* Match card background */
-            padding: 20px 0; /* Add padding for the logo */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle separator */
+            background: #343a40;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .card .logo-container img {
@@ -160,7 +159,10 @@
                 <a href="{{ url_for('pick_a_path') }}" class="btn btn-outline-secondary w-100">Continue Without Logging In</a>
             </div>
             <p class="mt-4 text-center">
-                Don't have an account? <a href="{{ url_for('create_account') }}" style="color: #007bff;">Sign up now</a>.
+                Don't have an account? <a href="{{ url_for('create_account') }}" style="color: #007bff;">Sign up now</a>
+            </p>
+            <p class="text-center">
+                Forgot Password? <a href="{{ url_for('forgot_password') }}" style="color: #007bff;">Reset Here</a>
             </p>
         </div>
     </div>

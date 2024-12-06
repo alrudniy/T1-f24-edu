@@ -92,41 +92,33 @@ s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
 def forgot_password():
     if request.method == 'POST':
         email = request.form['email']
-        
-        # For now, assuming the email is used as the username.
         user = db_session.query(User).filter_by(username=email).first()
 
-        # If user exists, proceed to send reset email
         if user:
-            # Generate a token using the email (which is used as the username for now)
             token = s.dumps(email, salt='password-reset-salt')
-            
-            # Create reset URL with token
             reset_url = url_for('reset_password', token=token, _external=True)
 
-            # Create the email message
             message = Message(
                 'Password Reset Request',
-                recipients=[email],  # Send to the user's email
+                recipients=[email],
                 body=f"To reset your password, visit the following link:\n{reset_url}"
             )
 
             try:
-                mail.send(message) # Sends the email with the reset link
+                mail.send(message)
                 flash('A password reset link has been sent to your email.', 'info')
             except Exception as e:
                 flash('There was an error sending the email. Please try again later.', 'error')
                 app.logger.error(f"Error sending password reset email: {e}")
         else:
             flash('No user found with that email address.', 'error')
-    
     return render_template('forgot_password.html')
+
 
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
     try:
-        # Decode the email (which is used as the username for now) from the token
-        email = s.loads(token, salt='password-reset-salt', max_age=3600)  # Token expires after 1 hour
+        email = s.loads(token, salt='password-reset-salt', max_age=3600)
     except:
         flash('The reset link is invalid or has expired.', 'error')
         return redirect(url_for('forgot_password'))
@@ -139,19 +131,17 @@ def reset_password(token):
             flash('Passwords do not match. Please try again.', 'error')
             return render_template('reset_password.html', token=token)
         
-        # Find user by email (which is used as the username for now)
         user = db_session.query(User).filter_by(username=email).first()
 
         if user:
-            # Update the user's password
             user.password = generate_password_hash(new_password, method='scrypt')
             db_session.commit()
-            flash('Your password has been updated!', 'success')
-            return redirect(url_for('login'))  # Redirect back to the login page
+            flash('Your password has been updated! You may now log in.', 'success')
+            return redirect(url_for('login'))
         else:
             flash('No user found with that email address.', 'error')
-    
-    return render_template('reset_password.html')
+    return render_template('reset_password.html', token=token)
+
 
 from flask_mail import Mail, Message
 
