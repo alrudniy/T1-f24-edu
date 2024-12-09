@@ -1,0 +1,56 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif; /* Or any other suitable font */
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(45deg, #3a1c71, #ffaf7b); /* Consistent background */
+    color: #fff; /* Default text color */
+}
+
+.container {
+    max-width: 800px; /* Adjust as needed */
+    margin: 20px auto; /* Center the container */
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+h1, h2, h3 {
+    color: #ffaf7b; /* Consistent heading color */
+    text-align: center;
+}
+
+a {
+    color: #ffaf7b;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #ffd1b3;
+}
+
+button, .btn { /* Style buttons and Bootstrap buttons */
+    background-color: #ffaf7b;
+    color: #3a1c71;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, .btn:hover {
+    background-color: #ffd1b3;
+}
+
+/* Add more specific styles for elements like lists, forms, etc. as needed */
+.list-group-item { /* Example for list items */
+    background-color: #fff;
+    color: #3a1c71;
+    border: none;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+/* ... other styles ... */

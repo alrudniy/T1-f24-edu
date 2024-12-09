@@ -135,12 +135,13 @@
 
         <h2 class="mt-4 text-center">Select an option below:</h2>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item text-center"><a href="{{ url_for('scenario1') }}" class="stretched-link">Scenario 1</a></li>
-            <li class="list-group-item text-center"><a href="{{ url_for('scenario2') }}" class="stretched-link">Scenario 2</a></li>
-            <li class="list-group-item text-center"><a href="{{ url_for('article1') }}" class="stretched-link">Article 1</a></li>
-            <li class="list-group-item"><a href="{{ url_for('landlord_experience') }}">Landlord Experience</a></li>
-            <li class="list-group-item"><a href="{{ url_for('text_message_visual') }}">Text Message</a></li>
+            <li class="list-group-item text-center"><a href="{{ url_for('article1') }}" class="stretched-link">Article</a></li>
+            <li class="list-group-item text-center"><a href="{{ url_for('landlord_experience') }}" class="stretched-link">Landlord Experiences</a></li>
+            <li class="list-group-item text-center"><a href="{{ url_for('text_message_visual') }}" class="stretched-link">Scenarios</a></li>
         </ul>
+        <div class="text-center mt-4">
+            <a href="{{ url_for('end') }}" class="btn btn-primary">Complete</a>
+        </div>
     </div>
 </body>
 

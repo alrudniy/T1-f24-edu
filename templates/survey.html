@@ -2,42 +2,111 @@
 <html>
 <head>
     <title>Survey</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #3a1c71, #ffaf7b);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h1 {
+            color: #ffaf7b;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        a, button {
+            display: inline-block;
+            background-color: #ffaf7b;
+            color: #3a1c71;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        a:hover, button:hover {
+            background-color: #ffd1b3;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        label {
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        input[type="submit"] {
+            cursor: pointer;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Survey</h1>
-    <form>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br><br>
-        
-        <label for="email">(Optional) Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
-        
-        <label for="age">Age:</label>
-        <select id="age bracket" name="age" required>
-            <option value="">Select Age Bracket</option>
-            <option value="male">18-27</option>
-            <option value="female">27-37</option>
-            <option value="other">37-50</option> 
-            <option value="other">50+</option> 
-            <option value="other">Prefer Not to Answer</option>
-        </select><br><br>
-        
-
-
-
-
-        <label for="gender">Gender:</label>
-        <select id="gender" name="gender" required>
-            <option value="">Select</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option> 
-            <option value="other">Prefer Not to Answer</option>  
+    <div class="container">
+        <h1>Survey</h1>
+        <form action="{{ url_for('survey') }}" method="post">
+            <label for="name">Name:</label> <input type="text" id="name" name="name" required><br><br>
+            
+            <label for="email">(Optional) Email:</label> <input type="email" id="email" name="email" required><br><br>
+            
+            <label for="age">Age:</label>
+            <select id="age bracket" name="age" required>
+                <option value="">Select Age Bracket</option>
+                <option value="18-27">18-27</option>
+                <option value="27-37">27-37</option>
+                <option value="37-50">37-50</option>
+                <option value="50+">50+</option>
+                <option value="prefer-not-to-answer">Prefer Not to Answer</option>
             </select><br><br>
-        
-        <label for="feedback">Feedback:</label><br>
-        <textarea id="feedback" name="feedback" rows="4" cols="50" required></textarea><br><br>
-        
-        <input type="submit" value="Submit">
-    </form>
+    
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="prefer-not-to-answer">Prefer Not to Answer</option>
+            </select><br><br>
+            
+            <label for="feedback">Feedback:</label><br> <textarea id="feedback" name="feedback" rows="4" cols="50" required></textarea><br><br>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </body>
 </html>
