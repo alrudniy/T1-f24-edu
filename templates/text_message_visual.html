@@ -3,26 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scripted Chat Application</title>
+    <title>Family Promise Chat Scenario</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header, footer {
+            background-color: #0077b6;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .back-button {
+            position: absolute;
+            top: 1em;
+            left: 1em;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: bold;
+            border: none;
+            padding: 0.5em;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+        }
+        .back-button:hover {
+            color: #ffd700;
+            border-bottom: 2px solid #ffd700;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            flex: 1;
         }
         .chat-container {
             display: flex;
             flex-direction: column;
-            max-width: 600px;
-            margin: 0 auto;
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 10px;
-            background-color: #f9f9f9;
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ddd;
         }
         .message {
             padding: 10px;
             margin: 5px 0;
             border-radius: 10px;
             max-width: 75%;
+            word-wrap: break-word;
         }
         .sent {
             align-self: flex-end;
@@ -36,14 +72,14 @@
         .input-container, .choice-container {
             display: flex;
             justify-content: center;
-            margin-top: 10px;
+            padding: 10px;
         }
         .input-container button, .choice-container button {
-            padding: 10px;
+            padding: 10px 20px;
             border: none;
             border-radius: 10px;
             background-color: #4caf50;
-            color: #fff;
+            color: white;
             cursor: pointer;
             margin: 0 5px;
         }
@@ -55,23 +91,41 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
+        footer {
+            font-size: 0.9em;
+            text-align: center;
+            padding: 10px;
+            background-color: #0077b6;
+        }
     </style>
 </head>
 <body>
-    <div class="chat-container" id="chatContainer">
-        <!-- Pre-scripted messages will be appended here -->
+    <header>
+        <a href="{{ url_for('pick_a_path') }}" class="back-button">← Back</a>
+        <h1>Family Promise Chat Scenario</h1>
+        <p>Learn how landlords communicate with tenants.</p>
+    </header>
+
+    <div class="container">
+        <div class="chat-container" id="chatContainer">
+            <!-- Pre-scripted messages will be appended here -->
+        </div>
+
+        <div class="input-container">
+            <button onclick="nextMessage()">Next</button>
+        </div>
+
+        <div class="choice-container" id="choiceContainer" style="display:none;">
+            <div class="choice-prompt" id="choicePrompt">What would be the best response?</div>
+            <button onclick="selectChoice(0)">Choice 1</button>
+            <button onclick="selectChoice(1)">Choice 2</button>
+            <button onclick="selectChoice(2)">Choice 3</button>
+        </div>
     </div>
 
-    <div class="input-container">
-        <button onclick="nextMessage()">Next</button>
-    </div>
-
-    <div class="choice-container" id="choiceContainer" style="display:none;">
-        <div class="choice-prompt" id="choicePrompt">What would be the best response?</div>
-        <button onclick="selectChoice(0)">Choice 1</button>
-        <button onclick="selectChoice(1)">Choice 2</button>
-        <button onclick="selectChoice(2)">Choice 3</button>
-    </div>
+    <footer>
+        <p>&copy; 2024 Family Promise | Empowering Families, Strengthening Communities</p>
+    </footer>
 
     <script>
         const messages = [
@@ -86,9 +140,7 @@
             ],
             nextMessage: { text: 'Thank you! I massively appreciate this opportunity.', type: 'received' } },
             { text: "This is great! I'm so excited to have a new tenant.", type : 'sent'},
-            { text: "My family will be so excited to finally have a home for Christmas.", type : 'received'},
             { text: "I'm so happy for you.", type : 'sent'}
-            // Add more pre-scripted messages and choices here
         ];
 
         let currentMessageIndex = 0;
@@ -99,6 +151,7 @@
             messageContainer.classList.add(type);
             messageContainer.textContent = text;
             document.getElementById('chatContainer').appendChild(messageContainer);
+            document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight;
         }
 
         function nextMessage() {
@@ -110,7 +163,6 @@
                 } else {
                     addMessage(message.text, message.type);
                     currentMessageIndex++;
-                    // Check for next normal message after choice
                     if (message.nextMessage) {
                         addMessage(message.nextMessage.text, message.nextMessage.type);
                         currentMessageIndex++;
@@ -138,7 +190,6 @@
                 currentMessageIndex++;
                 document.getElementById('choiceContainer').style.display = 'none';
                 document.querySelector('.input-container').style.display = 'flex';
-                // Add next message if exists after correct choice
                 if (message.nextMessage) {
                     addMessage(message.nextMessage.text, message.nextMessage.type);
                     currentMessageIndex++;
@@ -149,7 +200,6 @@
             }
         }
 
-        // Display the first message initially
         nextMessage();
     </script>
 </body>
