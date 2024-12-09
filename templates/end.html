@@ -51,7 +51,7 @@
 <body>
     <div class="container">
         <h1>End Page</h1>
-        <p>Congratulations, you have completed the scenario!</p> 
+        <p>Congratulations, you have completed the education app!</p> 
         {% if current_user.is_authenticated %}
             <a href="{{ url_for('survey') }}">Continue to Survey (Optional)</a>
         {% else %}

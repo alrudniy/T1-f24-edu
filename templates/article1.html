@@ -3,132 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Article 1 - Family Promise</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <meta name="description" content="Learn how landlords can support stable housing and strong communities with Family Promise.">
+    <title>Landlord Education | Family Promise</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
-            height: 100vh; /* Ensure the body takes up the full height of the viewport */
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            overflow-y: auto; /* Enable scrolling */
-        }
-
-        /* Background with intricate color gradient */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                135deg,
-                #f9f9f9 0%,      /* Soft white */
-                #ffd700 25%,     /* Family Promise yellow */
-                #87ceeb 50%,     /* Family Promise blue */
-                #f9f9f9 75%,     /* Soft white */
-                #555555 100%     /* Subtle gray */
-            );
-            z-index: -1;
-        }
-
-        .container {
-            max-width: 800px;
-            width: 100%;
-            margin: 20px;
-            background-color: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            overflow: hidden; /* Prevent content from overflowing */
-        }
-
-        .article-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .article-header h1 {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #87ceeb;
-        }
-
-        .article-header p {
-            font-size: 1rem;
-            color: #555;
-        }
-
-        .article-body {
-            line-height: 1.8;
-            font-size: 1.1rem;
+            background-color: #f7f7f7;
             color: #333;
         }
-
-        .article-body p {
-            margin-bottom: 20px;
-        }
-
-        .article-footer {
+        header {
+            background-color: #0077b6;
+            color: #fff;
+            padding: 1em 0;
             text-align: center;
-            margin-top: 40px;
-            font-size: 1rem;
-            color: #555;
+            position: relative;
         }
-
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        header p {
+            margin: 0.5em 0 0;
+            font-size: 1.2em;
+        }
         .back-button {
             position: absolute;
-            top: 20px;
-            left: 20px;
-            background-color: #ffd700;
+            top: 1em;
+            left: 1em;
             color: #fff;
-            padding: 10px 15px;
-            font-size: 1rem;
-            border-radius: 10px;
             text-decoration: none;
+            font-size: 1em;
+            font-weight: bold;
+            border: none;
+            padding: 0.5em;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
         }
-
         .back-button:hover {
-            background-color: #e6c200;
+            color: #ffd700;
+            border-bottom: 2px solid #ffd700;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2em auto;
+            padding: 1em;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #0077b6;
+        }
+        p {
+            margin: 1em 0;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 2em;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2em;
+            padding: 1em 0;
+            background-color: #0077b6;
+            color: #fff;
+        }
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
-
-    <!-- Back Button -->
-    <a href="{{ url_for('pick_a_path') }}" class="back-button">Back</a>
-
-    <!-- Article Container -->
+    <header>
+        <a href="{{ url_for('pick_a_path') }}" class="back-button">← Back</a>
+        <h1>Family Promise Landlord Education Article</h1>
+        <p>Building Stable Housing, Stronger Communities</p>
+    </header>
     <div class="container">
-        <!-- Article Header -->
-        <div class="article-header">
-            <h1>Article Title Goes Here</h1>
-            <p>Published on: November 21, 2024</p>
-        </div>
-
-        <!-- Article Body -->
-        <div class="article-body">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla volutpat quam sit amet sollicitudin tincidunt. Integer nec lectus sit amet elit lobortis scelerisque. Morbi eget velit eget ligula facilisis tincidunt. Fusce scelerisque sollicitudin odio, nec cursus turpis efficitur id. Proin sollicitudin dui nec massa egestas, sed luctus libero hendrerit. Vivamus interdum sapien in ante condimentum, a fermentum erat sollicitudin.</p>
-
-            <p>Curabitur vehicula eu metus eu tristique. Aenean sit amet nibh euismod, gravida augue non, interdum risus. Nam malesuada odio vitae lorem vulputate, at fermentum elit lacinia. Nulla facilisi. Nam mollis bibendum sollicitudin. Vestibulum auctor risus felis, vel venenatis nunc suscipit non. Etiam gravida elit et turpis tincidunt, eget tincidunt nunc sollicitudin.</p>
-
-            <p>Ut semper lorem in ex pharetra, at facilisis nunc suscipit. Integer varius magna quis risus tincidunt, nec rhoncus sapien dapibus. In fermentum, leo sit amet condimentum laoreet, nisi turpis iaculis felis, id ullamcorper turpis ligula non lorem. Proin vitae ante mollis, suscipit ante sit amet, posuere neque. Fusce sit amet nunc sed nisi suscipit consequat.</p>
-
-            <p>Donec auctor laoreet risus at tempor. Etiam eleifend dui nec nisl auctor, in volutpat felis tincidunt. Phasellus a urna neque. Vestibulum ut sem orci. Aliquam erat volutpat. Nulla a bibendum purus, eu dapibus orci. Mauris faucibus sem at neque fermentum, sit amet venenatis risus fermentum. Nullam consectetur magna non lorem venenatis, et auctor lectus consequat.</p>
-        </div>
-
-        <!-- Article Footer -->
-        <div class="article-footer">
-            <p>&copy; 2024 Family Promise. All rights reserved.</p>
-        </div>
+        <h2>Welcome, Landlords!</h2>
+        <p>
+            At Family Promise, we recognize the important role landlords play in creating stable housing 
+            opportunities and fostering strong communities. This education hub is designed to provide you 
+            with the tools, insights, and resources you need to succeed as a landlord while supporting families 
+            in need.
+        </p>
+        <h2>Why Partner with Family Promise?</h2>
+        <p>
+            By partnering with Family Promise, you are helping to address housing insecurity and make a 
+            positive impact in your community. Our mission is to empower families to achieve lasting independence, 
+            and landlords like you are crucial to that goal. Together, we can ensure that tenants and landlords 
+            alike experience long-term success.
+        </p>
+        <h2>What You'll Learn</h2>
+        <p>Explore topics that matter most to landlords:</p>
+        <ul>
+            <li>Best practices for selecting and retaining reliable tenants.</li>
+            <li>How to foster open communication and mutual respect with tenants.</li>
+            <li>Understanding your rights and responsibilities as a landlord.</li>
+            <li>Conflict resolution strategies to handle common challenges.</li>
+        </ul>
+        <h2>Resources and Support</h2>
+        <p>
+            Family Promise offers a range of resources to support you in your role, including:
+        </p>
+        <ul>
+            <li>Guides and templates for leases and agreements.</li>
+            <li>Access to workshops and webinars tailored to landlords.</li>
+            <li>Ongoing support from our team to address your questions and concerns.</li>
+        </ul>
+        <h2>Join Us in Making a Difference</h2>
+        <p>
+            Together, we can transform lives, one lease at a time. By providing stable housing and a 
+            supportive environment, you are playing a key role in helping families thrive. Thank you 
+            for partnering with Family Promise.
+        </p>
     </div>
-
+    <footer>
+        <p>&copy; 2024 Family Promise | Empowering Families, Strengthening Communities</p>
+    </footer>
 </body>
 </html>
